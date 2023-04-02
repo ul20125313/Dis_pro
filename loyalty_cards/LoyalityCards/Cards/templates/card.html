@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+
+{% block content %}
+{% load static %}
+<div><a href="{% url 'get_all_cards' %}">
+    <h1>Home</h1>
+</a></div>
+<div class="container ">
+    <h1>Card {{card.id}}</h1>
+    {% csrf_token %}
+    <p>Card series: {{card.series}}</p>
+    <p>Card number: {{card.card_number}}</p>
+    <p>Level of Membership: {{card.get_card_level_membership_display}}</p>
+    {% if card.card_status%}
+    <p>Card status: Active</p>
+    {% else %}
+    <p>Card status: Deactive</p>
+    {% endif %}
+    <button type="button">
+        <a href="{% url 'change_status' card.id %}">
+            Changes status Card
+        </a>
+    </button>
+
+    <form action="{% url 'update_card' card.id %}" method="post">
+        {% csrf_token %}
+        <label>Transaction Amount</label>
+        <input type="number" name="amount" placeholder="{{card.card_transaction_amount}}"/>
+        <br>
+        <button type="submit">update</button>
+    </form>
+
+
+    <button type="button">
+        <a href="{% url 'delete_card' card.id %}">
+            Delete Card
+        </a>
+    </button>
+</div>
+{% endblock %}

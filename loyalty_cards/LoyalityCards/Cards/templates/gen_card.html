@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<body xmlns="http://www.w3.org/1999/html">
+    <div class="jumbotron container row">
+        <div class="col-md-6">
+            <h1>Generator Cards</h1>
+            <div class="card card-body">
+                <form action="{% url 'gen_card' %}" method="post">
+                    {% csrf_token %}
+                    {{form.as_p}}
+                    <label>number of cards</label>
+                    <input type='number' name="count" />
+                    <label>transaction amount</label>
+                    <input type="number" name="amount"/>
+                    <input type="submit" name="Submit">
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
+{% endblock%}

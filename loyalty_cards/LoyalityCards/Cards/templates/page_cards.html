@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+
+{% block content %}
+{% load static %}
+<div><a href="{% url 'get_all_cards' %}">
+    <h1>Home</h1>
+</a></div>
+<div class="container ">
+    <h1>Cards</h1><br>
+    {% csrf_token %}
+    {% for c in cards%}
+    <div>
+        <a href="{% url 'get_card' c.id %}">
+            <h3>Card {{c.id}}</h3>
+        </a>
+        <p>Card series: {{c.series}}</p>
+        <p>Card number: {{c.card_number}}</p>
+        <p>Card released date: {{c.card_released}}</p>
+        <p>Valid date Card: {{c.card_valid_date}} month</p>
+        <p>transaction amount: {{c.card_transaction_amount}}$</p>
+        <p>level of membership: {{c.get_card_level_membership_display}}</p>
+        {% if card.card_status%}
+        <p>Card status: Active</p>
+        {% else %}
+        <p>Card status: Deactive</p>
+        {% endif %}
+    </div>
+    <br>
+
+    {% endfor %}
+</div>
+<a href="{% url 'gen_card' %}"><h4>Generate Cards</h4></a>
+{% endblock %}
