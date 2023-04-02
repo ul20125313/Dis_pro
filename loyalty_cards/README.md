@@ -7,7 +7,7 @@ To get this project up and running locally on your computer follow the following
 
 2. Run the following commands
 
-`pip install -r requirements.txt`
+add a .env file or write SECRET_KEY = os.urandom(24) #os.getenv('SECRET_KEY') in setting.py
 
 `python manage.py makemigrations`
 
@@ -22,3 +22,5 @@ To get this project up and running locally on your computer follow the following
 - Change Status to Card go 'card_id/change-status/'
 - Profil Card '/card_id/'
 - Delete to Card go '/card_id/delete/'
+
+5.
