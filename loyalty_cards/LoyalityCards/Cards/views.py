@@ -2,7 +2,7 @@ from django.shortcuts import redirect, render, get_object_or_404
 from .models import Card
 from .forms import Gen_Card_Form, Get_Cards
 from random import randint
-
+from .kafkaproducer import send_message
 
 def random_with_N_digits(n):
     range_start = 10 ** (n - 1)
