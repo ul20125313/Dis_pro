@@ -18,9 +18,4 @@ add a .env file or write SECRET_KEY = os.urandom(24) #os.getenv('SECRET_KEY') in
 3. Open a browser and go to http://localhost:8000/
 
 4. Function:
-- Generator to Card go '/gen-card/'
-- Change Status to Card go 'card_id/change-status/'
-- Profil Card '/card_id/'
-- Delete to Card go '/card_id/delete/'
-
-5.
+all of functions can be found in urls.py
