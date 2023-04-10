@@ -1,12 +1,14 @@
+from django.conf import settings
 from kafka import KafkaConsumer
 import json
 from .models import Card
 
 consumer = KafkaConsumer(
-    'card_generated',
-    bootstrap_servers=['localhost:9092'],
+    settings.KAFKA_TOPIC_CARD_GENERATED,
+    bootstrap_servers=settings.KAFKA_BOOTSTRAP_SERVERS,
     value_deserializer=lambda m: json.loads(m.decode('utf-8'))
 )
+
 
 def process_card_generated_message(message):
     card_id = message['id']
