@@ -3,7 +3,7 @@ from .models import Card
 from .forms import Gen_Card_Form, Get_Cards
 from random import randint
 from .kafkaproducer import send_message
-
+from .kafkaconsumer import consume_messages
 def random_with_N_digits(n):
     range_start = 10 ** (n - 1)
     range_end = (10 ** n) - 1
@@ -31,8 +31,7 @@ def generator_card(request):
         elif int(card_tran_amount) >= 100:
             card_level = 3
 
-        for i in range(
-                int(count)):  # generate diferent card number based on the number based on how many cards are generated
+        for i in range(int(count)):
             number = random_with_N_digits(15)
             numbers.append('4' + str(number))
 
@@ -44,9 +43,9 @@ def generator_card(request):
                 card_level_membership=card_level
             )
             card.save()
+            send_message('card_generated', {'id': card.id})
         return redirect('get_all_cards')
     return render(request, 'gen_card.html', context)
-
 
 def get_card(request, card_id):
     form = Get_Cards()
